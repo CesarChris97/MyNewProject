@@ -1,1 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- 
+        Name: Cesar 
+        Date: May 13, 2026 
+        Purpose: Portfolio project with dynamic user interaction via prompt().
+    -->
+    <title>Cesar's Portfolio</title>
+    <style>
+        /* Basic styling to make it look clean */
+        body { font-family: sans-serif; background-color: #f4f4f4; margin: 0; padding: 0; }
+        header { background-color: #2e008b; color: white; padding: 20px; text-align: center; }
+        nav { background: #333; color: white; padding: 10px; text-align: center; }
+        nav a { color: white; margin: 0 15px; text-decoration: none; }
+        section { padding: 20px; margin: 20px; background: white; border-radius: 8px; }
+        h2 { border-bottom: 2px solid #2e008b; padding-bottom: 5px; }
+    </style>
+</head>
+<body>
 
+    <header>
+        <!-- This ID is used by the JavaScript below -->
+        <h1 id="welcome-header">Welcome to My Portfolio</h1>
+    </header>
+
+    <nav>
+        <a href="#about">About</a>
+        <a href="#projects">Projects</a>
+        <a href="#contact">Contact</a>
+    </nav>
+
+    <main>
+        <!-- 3a. About Section -->
+        <section id="about">
+            <h2>About Me</h2>
+            <p>I am a student currently studying IT, web development, and psychology. I have experience in the restaurant and construction industries, and I am passionate about fitness and automotive culture.</p>
+        </section>
+
+        <!-- 3b. Projects Section -->
+        <section id="projects">
+            <h2>Projects</h2>
+            <ul>
+                <li><a href="https://github.com/CesarChris97/MyAwesomeStore">My Awesome Store</a></li>
+                <li><a href="https://github.com/CesarChris97/cesarchris97.github.io">Personal Portfolio Site</a></li>
+                <li><a href="#">Deployment Project</a></li>
+            </ul>
+        </section>
+
+        <!-- 3c. Contact Section -->
+        <section id="contact">
+            <h2>Contact</h2>
+            <form>
+                <p>Name: <input type="text" name="name" required></p>
+                <p>Email: <input type="email" name="email" required></p>
+                <p>Subject: <input type="text" name="subject"></p>
+                <p>Message:<br><textarea name="message"></textarea></p>
+                <button type="submit">Submit</button>
+            </form>
+        </section>
+    </main>
+
+    <script>
+        // 1 & 2. Prompt user for name and store it
+        var visitorName = prompt("Please enter your name:");
+
+        // 3. Dynamically update the message at the top
+        if (visitorName) {
+            document.getElementById("welcome-header").innerText = "Welcome to my Portfolio, " + visitorName + "!";
+        }
+    </script>
+
+</body>
+</html>

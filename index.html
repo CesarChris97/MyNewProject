@@ -3,26 +3,86 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- 
-        Name: Cesar 
-        Date: May 13, 2026 
-        Purpose: Portfolio project with dynamic user interaction via prompt().
-    -->
     <title>Cesar's Portfolio</title>
     <style>
         /* Basic styling to make it look clean */
-        body { font-family: sans-serif; background-color: #f4f4f4; margin: 0; padding: 0; }
+        body { font-family: sans-serif; background-color: #f4f4f4; margin: 0; padding: 0; transition: background-color 0.4s, color 0.4s; }
         header { background-color: #2e008b; color: white; padding: 20px; text-align: center; }
-        nav { background: #333; color: white; padding: 10px; text-align: center; }
+        nav { background-color: #333; color: white; padding: 10px; text-align: center; }
         nav a { color: white; margin: 0 15px; text-decoration: none; }
-        section { padding: 20px; margin: 20px; background: white; border-radius: 8px; }
+        section { padding: 20px; margin: 20px; background-color: white; border-radius: 8px; transition: background-color 0.4s, color 0.4s; }
         h2 { border-bottom: 2px solid #2e008b; padding-bottom: 5px; }
+
+        /* =========================================================
+           NEW ASSIGNMENT STYLES
+           ========================================================= */
+        /* Dark Mode Switch Styling */
+        .theme-switch-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            gap: 10px;
+            padding: 10px 20px;
+            background-color: #f4f4f4;
+            transition: background-color 0.4s;
+        }
+        .theme-switch {
+            position: relative;
+            display: inline-block;
+            width: 44px;
+            height: 24px;
+        }
+        .theme-switch input { display: none; }
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+            border-radius: 24px;
+        }
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 16px; width: 16px;
+            left: 4px; bottom: 4px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+        input:checked + .slider { background-color: #2196F3; }
+        input:checked + .slider:before { transform: translateX(20px); }
+
+        /* Featured Content Visible Resource Boxes */
+        .resource-box {
+            padding: 15px;
+            margin: 15px 0;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+        }
+        #university-resources { background-color: #f0f7ff; border-left: 6px solid #0056b3; }
+        #personal-projects { background-color: #f9f0ff; border-left: 6px solid #6f42c1; }
+
+        /* Dark Theme Class Overrides */
+        body.dark-theme { background-color: #121212; color: #e0e0e0; }
+        body.dark-theme .theme-switch-wrapper { background-color: #1a1a1a; color: #fff; }
+        body.dark-theme section { background-color: #1e1e1e; color: #fff; border: 1px solid #333; }
+        body.dark-theme #university-resources { background-color: #1a2635; color: #fff; }
+        body.dark-theme #personal-projects { background-color: #231a2f; color: #fff; }
+        body.dark-theme nav { background-color: #000; }
     </style>
 </head>
 <body>
 
+    <div class="theme-switch-wrapper">
+        <span>Dark Mode</span>
+        <label class="theme-switch" for="checkbox">
+            <input type="checkbox" id="checkbox" />
+            <div class="slider"></div>
+        </label>
+    </div>
+
     <header>
-        <!-- This ID is used by the JavaScript below -->
         <h1 id="welcome-header">Welcome to My Portfolio</h1>
     </header>
 
@@ -33,13 +93,30 @@
     </nav>
 
     <main>
-        <!-- 3a. About Section -->
         <section id="about">
             <h2>About Me</h2>
-            <p>I am a student currently studying IT, web development, and psychology. I have experience in the restaurant and construction industries, and I am passionate about fitness and automotive culture.</p>
+            <p>Hi, I'm Cesar, an IT student specializing in networking, systems security, and modern web development architectures.</p>
+            
+            <h3>Skills & Technologies</h3>
+            <ul id="skills-list"></ul>
         </section>
 
-        <!-- 3b. Projects Section -->
+        <section id="featured-content">
+            <h2>Featured Content</h2>
+            
+            <div id="university-resources" class="resource-box">
+                <h3>University Resources</h3>
+                <p>Explore my academic program curriculum:</p>
+                <a href="https://www.ecpi.edu" target="_blank">ECPI University Official Site</a>
+            </div>
+
+            <div id="personal-projects" class="resource-box">
+                <h3>Personal Projects</h3>
+                <p>Take a look at the code repositories I've been maintaining:</p>
+                <a href="https://github.com/CesarChris97/MyNewProject" target="_blank">View My GitHub Project Repository</a>
+            </div>
+        </section>
+
         <section id="projects">
             <h2>Projects</h2>
             <ul>
@@ -49,14 +126,13 @@
             </ul>
         </section>
 
-        <!-- 3c. Contact Section -->
         <section id="contact">
             <h2>Contact</h2>
-            <form>
-                <p>Name: <input type="text" name="name" required></p>
+            <form id="contact-form">
+                <p>Name: <input type="text" id="name" name="name" required></p>
                 <p>Email: <input type="email" name="email" required></p>
                 <p>Subject: <input type="text" name="subject"></p>
-                <p>Message:<br><textarea name="message"></textarea></p>
+                <p>Message: <br><textarea name="message" id="message" required></textarea></p>
                 <button type="submit">Submit</button>
             </form>
         </section>
@@ -70,7 +146,60 @@
         if (visitorName) {
             document.getElementById("welcome-header").innerText = "Welcome to my Portfolio, " + visitorName + "!";
         }
-    </script>
 
+        // -----------------------------------------------------------
+        // NEW LECTURE RULES & LOGIC
+        // -----------------------------------------------------------
+
+        // STEP A: Conditional Visibility Rule
+        // Set this to a number less than 3 to show both boxes. Set to 3+ to hide University Resources.
+        const projectsCount = 2; 
+        const uniDiv = document.getElementById("university-resources");
+        const personalDiv = document.getElementById("personal-projects");
+
+        if (projectsCount < 3) {
+            uniDiv.style.display = "block";
+            personalDiv.style.display = "block";
+        } else {
+            personalDiv.style.display = "block";
+            uniDiv.style.display = "none";
+        }
+
+        // STEP B: Array Loop for Skills List Generation
+        const skills = ["HTML", "CSS", "JavaScript", "Git", "GitHub"];
+        const skillsListContainer = document.getElementById("skills-list");
+
+        skills.forEach(function(skill) {
+            const li = document.createElement("li");
+            li.textContent = skill;
+            skillsListContainer.appendChild(li);
+        });
+
+        // STEP C: Dark Mode Toggle Event Switcher
+        const toggleSwitch = document.getElementById("checkbox");
+        toggleSwitch.addEventListener("change", function(e) {
+            if (e.target.checked) {
+                document.body.classList.add("dark-theme");
+            } else {
+                document.body.classList.remove("dark-theme");
+            }
+        });
+
+        // STEP D: Contact Form Interactivity & Validation
+        const contactForm = document.getElementById("contact-form");
+        contactForm.addEventListener("submit", function(event) {
+            // Prevent the standard form submission HTTP page reload
+            event.preventDefault();
+
+            // Pull the user input name value
+            const inputName = document.getElementById("name").value;
+
+            // Display confirmation alert pop-up custom message string
+            alert("Thank you, " + inputName + ", your message has been sent!");
+
+            // Reset form input boxes blank
+            contactForm.reset();
+        });
+    </script>
 </body>
 </html>

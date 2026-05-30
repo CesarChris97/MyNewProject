@@ -6,16 +6,17 @@
     <title>Cesar's Portfolio</title>
     <style>
         /* Basic styling to make it look clean */
-        body { font-family: sans-serif; background-color: #f4f4f4; margin: 0; padding: 0; transition: background-color 0.4s, color 0.4s; }
+        body { font-family: sans-serif; background-color: #fafafa; margin: 0; padding: 0; transition: background-color 0.4s, color 0.4s; }
         header { background-color: #2e008b; color: white; padding: 20px; text-align: center; }
         nav { background-color: #333; color: white; padding: 10px; text-align: center; }
         nav a { color: white; margin: 0 15px; text-decoration: none; }
         section { padding: 20px; margin: 20px; background-color: white; border-radius: 8px; transition: background-color 0.4s, color 0.4s; }
         h2 { border-bottom: 2px solid #2e008b; padding-bottom: 5px; }
 
-        /* =========================================================
+        /* ==========================================================
            NEW ASSIGNMENT STYLES
-           ========================================================= */
+           ========================================================== */
+        
         /* Dark Mode Switch Styling */
         .theme-switch-wrapper {
             display: flex;
@@ -23,7 +24,7 @@
             justify-content: flex-end;
             gap: 10px;
             padding: 10px 20px;
-            background-color: #f4f4f4;
+            background-color: #fafafa;
             transition: background-color 0.4s;
         }
         .theme-switch {
@@ -60,8 +61,8 @@
             border: 1px solid #ccc;
             border-radius: 6px;
         }
-        #university-resources { background-color: #f0f7ff; border-left: 6px solid #0056b3; }
-        #personal-projects { background-color: #f9f0ff; border-left: 6px solid #6f42c1; }
+        #university-resources { background-color: #f8f7ff; border-left: 6px solid #0056b3; }
+        #personal-projects { background-color: #f9f8ff; border-left: 6px solid #6f42c1; }
 
         /* Dark Theme Class Overrides */
         body.dark-theme { background-color: #121212; color: #e0e0e0; }
@@ -112,47 +113,38 @@
 
             <div id="personal-projects" class="resource-box">
                 <h3>Personal Projects</h3>
-                <p>Take a look at the code repositories I've been maintaining:</p>
-                <a href="https://github.com/CesarChris97/MyNewProject" target="_blank">View My GitHub Project Repository</a>
-            </div>
-        </section>
-
-        <section id="projects">
-            <h2>Projects</h2>
-            <ul>
-                <li><a href="https://github.com/CesarChris97/MyAwesomeStore">My Awesome Store</a></li>
-                <li><a href="https://github.com/CesarChris97/cesarchris97.github.io">Personal Portfolio Site</a></li>
-                <li><a href="#">Deployment Project</a></li>
-            </ul>
+                </div>
         </section>
 
         <section id="contact">
-            <h2>Contact</h2>
+            <h2>Contact Me</h2>
             <form id="contact-form">
-                <p>Name: <input type="text" id="name" name="name" required></p>
-                <p>Email: <input type="email" name="email" required></p>
-                <p>Subject: <input type="text" name="subject"></p>
-                <p>Message: <br><textarea name="message" id="message" required></textarea></p>
-                <button type="submit">Submit</button>
+                <div style="margin-bottom: 10px;">
+                    <label for="name" style="display:block; margin-bottom:5px;">Name:</label>
+                    <input type="text" id="name" required style="width:100%; max-width:300px; padding:6px;">
+                </div>
+                <div style="margin-bottom: 10px;">
+                    <label for="email" style="display:block; margin-bottom:5px;">Email:</label>
+                    <input type="email" id="email" required style="width:100%; max-width:300px; padding:6px;">
+                </div>
+                <button type="submit" id="submit-btn" style="padding: 8px 15px; cursor: pointer;">Submit</button>
             </form>
+            <div id="form-status" style="margin-top: 15px; font-weight: bold;"></div>
         </section>
     </main>
 
     <script>
-        // 1 & 2. Prompt user for name and store it
+        // ==========================================================================
+        // 1. ORIGINAL CORE LOGIC: Prompt Visitor Name
+        // ==========================================================================
         var visitorName = prompt("Please enter your name:");
-
-        // 3. Dynamically update the message at the top
         if (visitorName) {
             document.getElementById("welcome-header").innerText = "Welcome to my Portfolio, " + visitorName + "!";
         }
 
-        // -----------------------------------------------------------
-        // NEW LECTURE RULES & LOGIC
-        // -----------------------------------------------------------
-
-        // STEP A: Conditional Visibility Rule
-        // Set this to a number less than 3 to show both boxes. Set to 3+ to hide University Resources.
+        // ==========================================================================
+        // 2. ORIGINAL CORE LOGIC: Conditional Visibility Rule
+        // ==========================================================================
         const projectsCount = 2; 
         const uniDiv = document.getElementById("university-resources");
         const personalDiv = document.getElementById("personal-projects");
@@ -165,7 +157,9 @@
             uniDiv.style.display = "none";
         }
 
-        // STEP B: Array Loop for Skills List Generation
+        // ==========================================================================
+        // 3. ORIGINAL CORE LOGIC: Array Loop for Skills List Generation
+        // ==========================================================================
         const skills = ["HTML", "CSS", "JavaScript", "Git", "GitHub"];
         const skillsListContainer = document.getElementById("skills-list");
 
@@ -175,30 +169,103 @@
             skillsListContainer.appendChild(li);
         });
 
-        // STEP C: Dark Mode Toggle Event Switcher
+        // ==========================================================================
+        // 4. NEW LOGIC: Dynamically Add a New Section or Message (Requirement 1)
+        // ==========================================================================
+        
+        // A. Add introduction to a recent project inside the Personal Projects div
+        if (personalDiv) {
+            const projectIntro = document.createElement("p");
+            projectIntro.textContent = "🚀 Latest Deployment: I just built a custom JavaScript application that uses window structures and shared matrix math loops.";
+            projectIntro.style.color = "#2e008b";
+            projectIntro.style.fontWeight = "500";
+            personalDiv.appendChild(projectIntro);
+        }
+
+        // B. Timed notification banner appearing at the top of the page after 2 seconds
+        setTimeout(() => {
+            const banner = document.createElement("div");
+            banner.style.cssText = `
+                background-color: #2196F3;
+                color: white;
+                text-align: center;
+                padding: 12px;
+                position: fixed;
+                top: 0; left: 0; width: 100%;
+                font-weight: bold;
+                z-index: 1000;
+                box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+            `;
+            banner.innerHTML = '✨ System Status: All modules loaded successfully. <span id="close-banner" style="float:right; margin-right:30px; cursor:pointer;">&times;</span>';
+            document.body.prepend(banner);
+
+            document.getElementById("close-banner").onclick = () => banner.remove();
+        }, 2000);
+
+        // ==========================================================================
+        // 5. NEW LOGIC: Reference and Modify Existing Elements (Requirement 2)
+        // ==========================================================================
+        // Element 1: Select and modify the Contact section styling directly
+        const contactSection = document.getElementById("contact");
+        if (contactSection) {
+            contactSection.style.border = "2px dashed #2e008b";
+        }
+
+        // Element 2: Target the Main Heading to change its color font-weight
+        const mainHeading = document.querySelector("h2");
+        if (mainHeading) {
+            mainHeading.style.letterSpacing = "1px";
+        }
+
+        // ==========================================================================
+        // 6. MIXED LOGIC: Dark Mode Toggle Event Switcher (Requirement 3 Integration)
+        // ==========================================================================
         const toggleSwitch = document.getElementById("checkbox");
         toggleSwitch.addEventListener("change", function(e) {
             if (e.target.checked) {
                 document.body.classList.add("dark-theme");
+                if (contactSection) contactSection.style.border = "2px dashed #2196F3";
             } else {
                 document.body.classList.remove("dark-theme");
+                if (contactSection) contactSection.style.border = "2px dashed #2e008b";
             }
         });
 
-        // STEP D: Contact Form Interactivity & Validation
+        // ==========================================================================
+        // 7. NEW LOGIC: Timed Confirmation Form Submission Handler (Requirement 3)
+        // ==========================================================================
         const contactForm = document.getElementById("contact-form");
+        const statusMessage = document.getElementById("form-status");
+        const submitButton = document.getElementById("submit-btn");
+
         contactForm.addEventListener("submit", function(event) {
-            // Prevent the standard form submission HTTP page reload
+            // a. Prevent default browser reload behavior
             event.preventDefault();
 
-            // Pull the user input name value
+            // Pull name value for personalized success context
             const inputName = document.getElementById("name").value;
 
-            // Display confirmation alert pop-up custom message string
-            alert("Thank you, " + inputName + ", your message has been sent!");
+            // b. Display a loading message dynamically
+            statusMessage.textContent = "⏳ Sending message... Please wait.";
+            statusMessage.style.color = "#d97706"; 
+            submitButton.disabled = true;
 
-            // Reset form input boxes blank
-            contactForm.reset();
+            // c. Delay confirmation message by 2.5 seconds using setTimeout
+            setTimeout(function() {
+                // d. Replace the loading status message with the final completion message
+                statusMessage.textContent = "✅ Thank you, " + inputName + ", your message has been sent successfully!";
+                statusMessage.style.color = "#16a34a"; 
+
+                // Reset form boxes
+                contactForm.reset();
+
+                // Re-enable submission capability after clear state
+                setTimeout(() => {
+                    statusMessage.textContent = "";
+                    submitButton.disabled = false;
+                }, 5000);
+
+            }, 2500); 
         });
     </script>
 </body>

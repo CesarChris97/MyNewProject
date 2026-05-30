@@ -14,7 +14,7 @@
         h2 { border-bottom: 2px solid #2e008b; padding-bottom: 5px; }
 
         /* ==========================================================
-           NEW ASSIGNMENT STYLES
+           ASSIGNMENT STYLES
            ========================================================== */
         
         /* Dark Mode Switch Styling */
@@ -64,6 +64,31 @@
         #university-resources { background-color: #f8f7ff; border-left: 6px solid #0056b3; }
         #personal-projects { background-color: #f9f8ff; border-left: 6px solid #6f42c1; }
 
+        /* Form Inputs Style */
+        input[type="text"], input[type="email"] {
+            width: 100%;
+            max-width: 300px;
+            padding: 8px;
+            margin-top: 4px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        button[type="submit"] {
+            background-color: #2e008b;
+            color: white;
+            border: none;
+            padding: 9px 18px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background-color 0.2s;
+        }
+        button[type="submit"]:disabled {
+            background-color: #999;
+            cursor: not-allowed;
+        }
+
         /* Dark Theme Class Overrides */
         body.dark-theme { background-color: #121212; color: #e0e0e0; }
         body.dark-theme .theme-switch-wrapper { background-color: #1a1a1a; color: #fff; }
@@ -71,6 +96,7 @@
         body.dark-theme #university-resources { background-color: #1a2635; color: #fff; }
         body.dark-theme #personal-projects { background-color: #231a2f; color: #fff; }
         body.dark-theme nav { background-color: #000; }
+        body.dark-theme button[type="submit"] { background-color: #2196F3; color: #fff; }
     </style>
 </head>
 <body>
@@ -89,7 +115,7 @@
 
     <nav>
         <a href="#about">About</a>
-        <a href="#projects">Projects</a>
+        <a href="#featured-content">Projects</a>
         <a href="#contact">Contact</a>
     </nav>
 
@@ -113,21 +139,21 @@
 
             <div id="personal-projects" class="resource-box">
                 <h3>Personal Projects</h3>
-                </div>
+            </div>
         </section>
 
         <section id="contact">
             <h2>Contact Me</h2>
             <form id="contact-form">
-                <div style="margin-bottom: 10px;">
-                    <label for="name" style="display:block; margin-bottom:5px;">Name:</label>
-                    <input type="text" id="name" required style="width:100%; max-width:300px; padding:6px;">
+                <div style="margin-bottom: 12px;">
+                    <label for="name" style="display:block; font-weight:bold;">Name:</label>
+                    <input type="text" id="name" required placeholder="Enter your name">
                 </div>
-                <div style="margin-bottom: 10px;">
-                    <label for="email" style="display:block; margin-bottom:5px;">Email:</label>
-                    <input type="email" id="email" required style="width:100%; max-width:300px; padding:6px;">
+                <div style="margin-bottom: 15px;">
+                    <label for="email" style="display:block; font-weight:bold;">Email:</label>
+                    <input type="email" id="email" required placeholder="Enter your email">
                 </div>
-                <button type="submit" id="submit-btn" style="padding: 8px 15px; cursor: pointer;">Submit</button>
+                <button type="submit" id="submit-btn">Submit</button>
             </form>
             <div id="form-status" style="margin-top: 15px; font-weight: bold;"></div>
         </section>
@@ -135,7 +161,7 @@
 
     <script>
         // ==========================================================================
-        // 1. ORIGINAL CORE LOGIC: Prompt Visitor Name
+        // 1. ORIGINAL LOGIC: Prompt Visitor Name
         // ==========================================================================
         var visitorName = prompt("Please enter your name:");
         if (visitorName) {
@@ -143,7 +169,7 @@
         }
 
         // ==========================================================================
-        // 2. ORIGINAL CORE LOGIC: Conditional Visibility Rule
+        // 2. ORIGINAL LOGIC: Conditional Visibility Rule
         // ==========================================================================
         const projectsCount = 2; 
         const uniDiv = document.getElementById("university-resources");
@@ -158,7 +184,7 @@
         }
 
         // ==========================================================================
-        // 3. ORIGINAL CORE LOGIC: Array Loop for Skills List Generation
+        // 3. ORIGINAL LOGIC: Array Loop for Skills List Generation
         // ==========================================================================
         const skills = ["HTML", "CSS", "JavaScript", "Git", "GitHub"];
         const skillsListContainer = document.getElementById("skills-list");
@@ -170,19 +196,19 @@
         });
 
         // ==========================================================================
-        // 4. NEW LOGIC: Dynamically Add a New Section or Message (Requirement 1)
+        // 4. NEW REQUIREMENT: Dynamically Add a New Section or Message
         // ==========================================================================
         
-        // A. Add introduction to a recent project inside the Personal Projects div
+        // A. Add introduction paragraph to your Personal Projects block using appendChild()
         if (personalDiv) {
             const projectIntro = document.createElement("p");
-            projectIntro.textContent = "🚀 Latest Deployment: I just built a custom JavaScript application that uses window structures and shared matrix math loops.";
+            projectIntro.textContent = "🚀 Latest Deployment: I just finished building and establishing an interactive Math Table Pop-Up matrix app framework utilizing sessionStorage streams.";
             projectIntro.style.color = "#2e008b";
-            projectIntro.style.fontWeight = "500";
+            projectIntro.style.fontWeight = "bold";
             personalDiv.appendChild(projectIntro);
         }
 
-        // B. Timed notification banner appearing at the top of the page after 2 seconds
+        // B. Timed alert banner tracking page delivery initialization status
         setTimeout(() => {
             const banner = document.createElement("div");
             banner.style.cssText = `
@@ -196,29 +222,29 @@
                 z-index: 1000;
                 box-shadow: 0 2px 8px rgba(0,0,0,0.2);
             `;
-            banner.innerHTML = '✨ System Status: All modules loaded successfully. <span id="close-banner" style="float:right; margin-right:30px; cursor:pointer;">&times;</span>';
+            banner.innerHTML = '✨ Portfolio status: Online & Fully Configured. <span id="close-banner" style="float:right; margin-right:30px; cursor:pointer; font-size:1.2rem;">&times;</span>';
             document.body.prepend(banner);
 
             document.getElementById("close-banner").onclick = () => banner.remove();
         }, 2000);
 
         // ==========================================================================
-        // 5. NEW LOGIC: Reference and Modify Existing Elements (Requirement 2)
+        // 5. NEW REQUIREMENT: Reference and Modify Existing Elements with Selectors
         // ==========================================================================
-        // Element 1: Select and modify the Contact section styling directly
+        // Modification 1: Target the Contact container explicitly via ID selector
         const contactSection = document.getElementById("contact");
         if (contactSection) {
             contactSection.style.border = "2px dashed #2e008b";
         }
 
-        // Element 2: Target the Main Heading to change its color font-weight
-        const mainHeading = document.querySelector("h2");
-        if (mainHeading) {
-            mainHeading.style.letterSpacing = "1px";
+        // Modification 2: Target sub-section tags via querySelector to clean lettering layout
+        const intermediateHeadings = document.querySelector("h2");
+        if (intermediateHeadings) {
+            intermediateHeadings.style.letterSpacing = "0.5px";
         }
 
         // ==========================================================================
-        // 6. MIXED LOGIC: Dark Mode Toggle Event Switcher (Requirement 3 Integration)
+        // 6. ORIGINAL LOGIC: Dark Mode Toggle Event Switcher
         // ==========================================================================
         const toggleSwitch = document.getElementById("checkbox");
         toggleSwitch.addEventListener("change", function(e) {
@@ -232,34 +258,35 @@
         });
 
         // ==========================================================================
-        // 7. NEW LOGIC: Timed Confirmation Form Submission Handler (Requirement 3)
+        // 7. NEW REQUIREMENT: Timed Confirmation for Form Submissions
         // ==========================================================================
         const contactForm = document.getElementById("contact-form");
         const statusMessage = document.getElementById("form-status");
         const submitButton = document.getElementById("submit-btn");
 
         contactForm.addEventListener("submit", function(event) {
-            // a. Prevent default browser reload behavior
+            // a. Prevent the standard page reload handling action
             event.preventDefault();
 
-            // Pull name value for personalized success context
+            // Pull standard name field tracking details
             const inputName = document.getElementById("name").value;
 
-            // b. Display a loading message dynamically
-            statusMessage.textContent = "⏳ Sending message... Please wait.";
+            // b. Display dynamic sending statement element updates
+            statusMessage.textContent = "⏳ Sending your message details... Please hold.";
             statusMessage.style.color = "#d97706"; 
             submitButton.disabled = true;
 
-            // c. Delay confirmation message by 2.5 seconds using setTimeout
+            // c. Delay processing state updates by 2.5 seconds using standard setTimeout
             setTimeout(function() {
-                // d. Replace the loading status message with the final completion message
-                statusMessage.textContent = "✅ Thank you, " + inputName + ", your message has been sent successfully!";
+                
+                // d. Swap placeholder content updates with final validation receipt details
+                statusMessage.textContent = "✅ Thank you, " + inputName + "! Your submission message data was processed successfully!";
                 statusMessage.style.color = "#16a34a"; 
 
-                // Reset form boxes
+                // Reset standard form inputs layout fields back to fresh baseline state
                 contactForm.reset();
 
-                // Re-enable submission capability after clear state
+                // Clear feedback and enable click paths after a minor reading window
                 setTimeout(() => {
                     statusMessage.textContent = "";
                     submitButton.disabled = false;

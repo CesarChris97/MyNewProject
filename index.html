@@ -6,7 +6,7 @@
     <title>Cesar's Portfolio</title>
     <style>
         /* ===================================================
-           BASE PORTFOLIO STYLES (From your live template)
+           CESAR'S ORIGINAL PORTFOLIO CORE STYLES
            =================================================== */
         body { 
             font-family: sans-serif; 
@@ -22,10 +22,6 @@
             padding: 20px; 
             text-align: center; 
         }
-        header h1 {
-            margin: 0 0 10px 0;
-            font-size: 2.2rem;
-        }
         nav { 
             background-color: #333; 
             color: white; 
@@ -35,8 +31,7 @@
         nav a { 
             color: white; 
             margin: 0 15px; 
-            text-align: none; 
-            text-decoration: none;
+            text-decoration: none; 
             font-weight: bold;
         }
         nav a:hover {
@@ -47,13 +42,27 @@
             margin: 20px; 
             background-color: white; 
             border-radius: 8px; 
-            border: 1px solid #ddd;
-            transition: background-color 0.4s, color 0.4s, border-color 0.4s; 
+            transition: background-color 0.4s, color 0.4s; 
         }
+        
+        /* Cesar's Custom Framed Section Outlines */
+        #about {
+            border: 2px solid #2e008b;
+        }
+        #projects {
+            border: 2px solid #45249c;
+        }
+        #contact {
+            border: 2px dashed #3071a9;
+            border-radius: 4px;
+            padding: 20px;
+        }
+
         h2 { 
             border-bottom: 2px solid #2e008b; 
             padding-bottom: 5px; 
             color: #2e008b;
+            margin-top: 0;
         }
         ul {
             padding-left: 20px;
@@ -61,24 +70,63 @@
         li {
             margin-bottom: 5px;
         }
-        .resource-box {
-            background-color: #f0f4f8;
+
+        /* University Resources Box */
+        .university-box {
+            border: 1px solid #3071a9;
+            border-radius: 4px;
             padding: 15px;
-            border-radius: 6px;
-            border-left: 4px solid #2e008b;
+            background-color: #ffffff;
+            transition: background-color 0.4s;
+        }
+        .personal-projects-box {
+            border: 1px solid #45249c;
+            border-radius: 4px;
+            padding: 15px;
+            margin-top: 15px;
+            background-color: #ffffff;
+            transition: background-color 0.4s;
+        }
+
+        /* Cesar's Styled Input Fields */
+        input[type="text"], input[type="email"], textarea {
+            width: 100%;
+            max-width: 300px;
+            padding: 6px;
+            margin-top: 4px;
+            margin-bottom: 12px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            display: block;
+            box-sizing: border-box;
+        }
+        textarea {
+            max-width: 400px;
+            height: 60px;
+        }
+
+        /* Original Submit Button Style */
+        .submit-btn-container button {
+            background-color: #3071a9;
+            color: white;
+            border: none;
+            padding: 6px 14px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.9rem;
         }
 
         /* ===================================================
-           ASSIGNMENT STYLES (Required Features)
+           ASSIGNMENT REQUIRED INTERACTIVE STYLES
            =================================================== */
         
-        /* 1. Theme Switch Placement Styling */
+        /* 1. Theme Dark Mode Switch Layout */
         .theme-switch-wrapper {
             display: flex;
             justify-content: flex-end;
             align-items: center;
             padding: 10px 20px;
-            background-color: #eaeaea;
+            background-color: #ffffff;
             transition: background-color 0.4s;
         }
         .theme-switch-wrapper span {
@@ -86,43 +134,36 @@
             font-size: 0.9rem;
             font-weight: bold;
         }
-        /* Toggle Switch Slider Design */
         .theme-switch {
             position: relative;
             display: inline-block;
-            width: 50px;
-            height: 24px;
+            width: 46px;
+            height: 22px;
         }
         .theme-switch input {
-            opacity: 0;
-            width: 0;
-            height: 0;
+            opacity: 0; width: 0; height: 0;
         }
         .slider {
-            position: absolute;
-            cursor: pointer;
+            position: absolute; cursor: pointer;
             top: 0; left: 0; right: 0; bottom: 0;
             background-color: #ccc;
-            transition: .4s;
-            border-radius: 24px;
+            transition: .4s; border-radius: 22px;
         }
         .slider:before {
-            position: absolute;
-            content: "";
-            height: 16px; width: 16px;
+            position: absolute; content: "";
+            height: 14px; width: 14px;
             left: 4px; bottom: 4px;
             background-color: white;
-            transition: .4s;
-            border-radius: 50%;
+            transition: .4s; border-radius: 50%;
         }
         input:checked + .slider {
-            background-color: #2e008b;
+            background-color: #3071a9;
         }
         input:checked + .slider:before {
-            transform: translateX(26px);
+            transform: translateX(24px);
         }
 
-        /* 2. Custom Welcome Modal Styles */
+        /* 2. Custom Welcome Modal Windows */
         .modal-overlay {
             position: fixed;
             top: 0; left: 0;
@@ -137,67 +178,50 @@
         }
         .modal-content {
             background-color: #ffffff;
-            padding: 30px;
+            padding: 25px;
             border-radius: 8px;
             text-align: center;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-            max-width: 400px;
-            width: 80%;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            max-width: 360px;
+            width: 85%;
             transition: background-color 0.4s, color 0.4s;
         }
         .modal-content h3 {
             margin-top: 0;
             color: #2e008b;
-            font-size: 1.5rem;
         }
         .modal-content button {
             background-color: #2e008b;
             color: white;
             border: none;
-            padding: 10px 20px;
-            border-radius: 5px;
+            padding: 8px 20px;
+            border-radius: 4px;
             cursor: pointer;
             font-weight: bold;
-            margin-top: 15px;
-        }
-        .modal-content button:hover {
-            background-color: #4300c7;
+            margin-top: 10px;
         }
 
-        /* 3. Tooltip Layout Elements */
+        /* 3. Button Action Hover Tooltip */
         .submit-btn-container {
             position: relative;
             display: inline-block;
-            margin-top: 15px;
-        }
-        .submit-btn-container button {
-            background-color: #2e008b;
-            color: white;
-            border: none;
-            padding: 10px 25px;
-            border-radius: 4px;
-            font-weight: bold;
-            cursor: pointer;
-        }
-        .submit-btn-container button:hover {
-            background-color: #4300c7;
         }
         .submit-btn-container .tooltip-text {
             visibility: hidden;
-            width: 180px;
-            background-color: #333;
-            color: #fff;
+            width: 160px;
+            background-color: #222222;
+            color: #ffffff;
             text-align: center;
-            border-radius: 6px;
-            padding: 8px 0;
+            border-radius: 5px;
+            padding: 6px 0;
             position: absolute;
             z-index: 1;
-            bottom: 125%;
+            bottom: 130%;
             left: 50%;
-            margin-left: -90px;
+            margin-left: -80px;
             opacity: 0;
             transition: opacity 0.2s;
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             pointer-events: none;
         }
         .submit-btn-container:hover .tooltip-text {
@@ -205,38 +229,45 @@
             opacity: 1;
         }
 
-        /* 4. Active Dark Mode Explicit Overrides */
+        /* ===================================================
+           DYNAMIC DARK MODE OVERRIDES
+           =================================================== */
         body.dark-mode {
             background-color: #121212;
             color: #e0e0e0;
         }
         body.dark-mode .theme-switch-wrapper {
-            background-color: #1a1a1a;
+            background-color: #121212;
+            color: #ffffff;
         }
         body.dark-mode section {
             background-color: #1e1e1e;
-            border-color: #333;
+        }
+        body.dark-mode .university-box, 
+        body.dark-mode .personal-projects-box {
+            background-color: #262626;
         }
         body.dark-mode h2 {
             color: #9d76ff;
-            border-bottom-color: #9d76ff;
+            border-bottom-color: #45249c;
         }
         body.dark-mode .modal-content {
             background-color: #1e1e1e;
             color: #ffffff;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.6);
         }
         body.dark-mode .modal-content h3 {
             color: #9d76ff;
         }
-        body.dark-mode .modal-content button,
-        body.dark-mode .submit-btn-container button {
+        body.dark-mode .modal-content button {
             background-color: #9d76ff;
             color: #121212;
         }
-        body.dark-mode .resource-box {
-            background-color: #252525;
-            border-left-color: #9d76ff;
+        body.dark-mode input[type="text"], 
+        body.dark-mode input[type="email"], 
+        body.dark-mode textarea {
+            background-color: #2a2a2a;
+            border-color: #444;
+            color: #fff;
         }
     </style>
 </head>
@@ -259,7 +290,7 @@
     </div>
 
     <header>
-        <h1>Welcome to my Portfolio, Chris!</h1>
+        <h1 style="margin: 0; font-size: 2rem;">Welcome to my Portfolio, Christopher!</h1>
     </header>
 
     <nav>
@@ -271,51 +302,56 @@
     <section id="about">
         <h2>About Me</h2>
         <p>Hi, I'm Cesar, an IT student specializing in networking, systems security, and modern web development architectures.</p>
-        
         <h3>Skills & Technologies</h3>
         <ul>
-            <li>HTML5 / CSS3 (Flexbox, Grid)</li>
-            <li>JavaScript (ES6+)</li>
-            <li>IT Networking & Protocols</li>
-            <li>Git & GitHub Deployment</li>
+            <li>HTML</li>
+            <li>CSS</li>
+            <li>JavaScript</li>
+            <li>Git</li>
+            <li>GitHub</li>
         </ul>
     </section>
 
     <section id="projects">
         <h2>Featured Content</h2>
-        <div class="resource-box">
-            <h4>University Resources</h4>
-            <p>Explore my academic program curriculum:</p>
-            <a href="https://www.ecpi.edu" target="_blank" style="color: #2e008b; font-weight: bold;" id="univ-link">ECPI University Official Site</a>
+        
+        <div class="university-box">
+            <h4 style="margin-top: 0; color: #3071a9;">University Resources</h4>
+            <p style="margin-bottom: 8px;">Explore my academic program curriculum:</p>
+            <a href="https://www.ecpi.edu" target="_blank" style="color: #3071a9; font-weight: bold;" id="univ-link">ECPI University Official Site</a>
+        </div>
+
+        <div class="personal-projects-box">
+            <h4 style="margin-top: 0; color: #45249c;">Personal Projects</h4>
+            <p style="margin-bottom: 0;">🚀 <strong>Latest Deployment:</strong> I just finished building and establishing an interactive Math Table Pop-Up matrix app framework utilizing sessionStorage streams.</p>
         </div>
     </section>
 
     <section id="contact">
-        <h2>Contact</h2>
-        <p>Feel free to reach out by using the form setup below.</p>
-        <form id="portfolio-contact-form" onsubmit="event.preventDefault();">
-            <div style="margin-bottom: 10px;">
-                <label style="display: block; margin-bottom: 5px;">Name:</label>
-                <input type="text" style="width: 100%; max-width: 300px; padding: 6px;" placeholder="Your Name" required />
-            </div>
-            <div style="margin-bottom: 10px;">
-                <label style="display: block; margin-bottom: 5px;">Message:</label>
-                <textarea style="width: 100%; max-width: 400px; height: 80px; padding: 6px;" placeholder="Your Message..." required></textarea>
-            </div>
+        <h2 style="color: #3071a9; border-bottom-color: #3071a9;">Contact Me</h2>
+        <form id="portfolio-form" onsubmit="event.preventDefault();">
             
+            <label style="font-weight: bold; font-size: 0.9rem;">Name:</label>
+            <input type="text" placeholder="Enter your name" required />
+
+            <label style="font-weight: bold; font-size: 0.9rem;">Email:</label>
+            <input type="email" placeholder="Enter your email" required />
+
+            <label style="font-weight: bold; font-size: 0.9rem;">Message:</label>
+            <textarea placeholder="Enter your message..." required></textarea>
+
             <div class="submit-btn-container">
-                <button type="submit" id="submit-btn">Submit</button>
+                <button type="submit">Submit</button>
                 <span class="tooltip-text">Click to send your message!</span>
             </div>
+            
         </form>
     </section>
 
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             
-            // ----------------------------------------------------
-            // FEATURE 1: Modal Control Module
-            // ----------------------------------------------------
+            // 1. Welcome Modal Dismissal Logic
             const modal = document.getElementById("welcome-modal");
             const closeModalBtn = document.getElementById("close-modal-btn");
 
@@ -324,52 +360,37 @@
                     modal.style.opacity = "0";
                     setTimeout(() => {
                         modal.style.display = "none";
-                    }, 300); // Smooth animation exit execution
+                    }, 300);
                 });
             }
 
-            // ----------------------------------------------------
-            // FEATURE 2: Dark Mode Preference Storage Engine
-            // ----------------------------------------------------
+            // 2. Persistent LocalStorage Dark Mode Logic
             const toggleSwitch = document.querySelector('#checkbox');
-            const currentTheme = localStorage.getItem('theme');
+            const savedTheme = localStorage.getItem('theme');
 
-            // Set layout dynamically based on historical user choices
-            if (currentTheme) {
-                document.documentElement.setAttribute('data-theme', currentTheme);
-                
-                if (currentTheme === 'dark') {
-                    toggleSwitch.checked = true;
-                    document.body.classList.add('dark-mode');
-                    updateUniversityLinkTheme(true);
-                }
+            if (savedTheme === 'dark') {
+                toggleSwitch.checked = true;
+                document.body.classList.add('dark-mode');
+                updateLinks(true);
             }
 
-            // Read live adjustments to save state parameters down to local client storage
-            function switchTheme(e) {
+            toggleSwitch.addEventListener('change', function(e) {
                 if (e.target.checked) {
-                    document.documentElement.setAttribute('data-theme', 'dark');
                     localStorage.setItem('theme', 'dark');
                     document.body.classList.add('dark-mode');
-                    updateUniversityLinkTheme(true);
+                    updateLinks(true);
                 } else {
-                    document.documentElement.setAttribute('data-theme', 'light');
                     localStorage.setItem('theme', 'light');
                     document.body.classList.remove('dark-mode');
-                    updateUniversityLinkTheme(false);
+                    updateLinks(false);
                 }    
-            }
+            });
 
-            // Dynamic color adjustment for nested inline anchor layout pieces
-            function updateUniversityLinkTheme(isDark) {
+            function updateLinks(isDark) {
                 const univLink = document.getElementById('univ-link');
-                if(univLink) {
-                    univLink.style.color = isDark ? '#9d76ff' : '#2e008b';
+                if (univLink) {
+                    univLink.style.color = isDark ? '#9d76ff' : '#3071a9';
                 }
-            }
-
-            if (toggleSwitch) {
-                toggleSwitch.addEventListener('change', switchTheme, false);
             }
         });
     </script>

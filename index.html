@@ -5,35 +5,99 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cesar's Portfolio</title>
     <style>
-        /* Basic styling to make it look clean */
-        body { font-family: sans-serif; background-color: #fafafa; margin: 0; padding: 0; transition: background-color 0.4s, color 0.4s; }
-        header { background-color: #2e008b; color: white; padding: 20px; text-align: center; }
-        nav { background-color: #333; color: white; padding: 10px; text-align: center; }
-        nav a { color: white; margin: 0 15px; text-decoration: none; }
-        section { padding: 20px; margin: 20px; background-color: white; border-radius: 8px; transition: background-color 0.4s, color 0.4s; }
-        h2 { border-bottom: 2px solid #2e008b; padding-bottom: 5px; }
+        /* ===================================================
+           BASE PORTFOLIO STYLES (From your live template)
+           =================================================== */
+        body { 
+            font-family: sans-serif; 
+            background-color: #fafafa; 
+            margin: 0; 
+            padding: 0; 
+            transition: background-color 0.4s, color 0.4s; 
+            color: #333;
+        }
+        header { 
+            background-color: #2e008b; 
+            color: white; 
+            padding: 20px; 
+            text-align: center; 
+        }
+        header h1 {
+            margin: 0 0 10px 0;
+            font-size: 2.2rem;
+        }
+        nav { 
+            background-color: #333; 
+            color: white; 
+            padding: 10px; 
+            text-align: center; 
+        }
+        nav a { 
+            color: white; 
+            margin: 0 15px; 
+            text-align: none; 
+            text-decoration: none;
+            font-weight: bold;
+        }
+        nav a:hover {
+            text-decoration: underline;
+        }
+        section { 
+            padding: 20px; 
+            margin: 20px; 
+            background-color: white; 
+            border-radius: 8px; 
+            border: 1px solid #ddd;
+            transition: background-color 0.4s, color 0.4s, border-color 0.4s; 
+        }
+        h2 { 
+            border-bottom: 2px solid #2e008b; 
+            padding-bottom: 5px; 
+            color: #2e008b;
+        }
+        ul {
+            padding-left: 20px;
+        }
+        li {
+            margin-bottom: 5px;
+        }
+        .resource-box {
+            background-color: #f0f4f8;
+            padding: 15px;
+            border-radius: 6px;
+            border-left: 4px solid #2e008b;
+        }
 
-        /* ==========================================================
-           ASSIGNMENT STYLES
-           ========================================================== */
+        /* ===================================================
+           ASSIGNMENT STYLES (Required Features)
+           =================================================== */
         
-        /* Dark Mode Switch Styling */
+        /* 1. Theme Switch Placement Styling */
         .theme-switch-wrapper {
             display: flex;
-            align-items: center;
             justify-content: flex-end;
-            gap: 10px;
+            align-items: center;
             padding: 10px 20px;
-            background-color: #fafafa;
+            background-color: #eaeaea;
             transition: background-color 0.4s;
         }
+        .theme-switch-wrapper span {
+            margin-right: 10px;
+            font-size: 0.9rem;
+            font-weight: bold;
+        }
+        /* Toggle Switch Slider Design */
         .theme-switch {
             position: relative;
             display: inline-block;
-            width: 44px;
+            width: 50px;
             height: 24px;
         }
-        .theme-switch input { display: none; }
+        .theme-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
         .slider {
             position: absolute;
             cursor: pointer;
@@ -51,55 +115,140 @@
             transition: .4s;
             border-radius: 50%;
         }
-        input:checked + .slider { background-color: #2196F3; }
-        input:checked + .slider:before { transform: translateX(20px); }
-
-        /* Featured Content Visible Resource Boxes */
-        .resource-box {
-            padding: 15px;
-            margin: 15px 0;
-            border: 1px solid #ccc;
-            border-radius: 6px;
+        input:checked + .slider {
+            background-color: #2e008b;
         }
-        #university-resources { background-color: #f8f7ff; border-left: 6px solid #0056b3; }
-        #personal-projects { background-color: #f9f8ff; border-left: 6px solid #6f42c1; }
-
-        /* Form Inputs Style */
-        input[type="text"], input[type="email"] {
-            width: 100%;
-            max-width: 300px;
-            padding: 8px;
-            margin-top: 4px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            box-sizing: border-box;
+        input:checked + .slider:before {
+            transform: translateX(26px);
         }
-        button[type="submit"] {
+
+        /* 2. Custom Welcome Modal Styles */
+        .modal-overlay {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background-color: rgba(0, 0, 0, 0.6);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            opacity: 1;
+            transition: opacity 0.3s ease;
+        }
+        .modal-content {
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            max-width: 400px;
+            width: 80%;
+            transition: background-color 0.4s, color 0.4s;
+        }
+        .modal-content h3 {
+            margin-top: 0;
+            color: #2e008b;
+            font-size: 1.5rem;
+        }
+        .modal-content button {
             background-color: #2e008b;
             color: white;
             border: none;
-            padding: 9px 18px;
-            border-radius: 4px;
+            padding: 10px 20px;
+            border-radius: 5px;
             cursor: pointer;
             font-weight: bold;
-            transition: background-color 0.2s;
+            margin-top: 15px;
         }
-        button[type="submit"]:disabled {
-            background-color: #999;
-            cursor: not-allowed;
+        .modal-content button:hover {
+            background-color: #4300c7;
         }
 
-        /* Dark Theme Class Overrides */
-        body.dark-theme { background-color: #121212; color: #e0e0e0; }
-        body.dark-theme .theme-switch-wrapper { background-color: #1a1a1a; color: #fff; }
-        body.dark-theme section { background-color: #1e1e1e; color: #fff; border: 1px solid #333; }
-        body.dark-theme #university-resources { background-color: #1a2635; color: #fff; }
-        body.dark-theme #personal-projects { background-color: #231a2f; color: #fff; }
-        body.dark-theme nav { background-color: #000; }
-        body.dark-theme button[type="submit"] { background-color: #2196F3; color: #fff; }
+        /* 3. Tooltip Layout Elements */
+        .submit-btn-container {
+            position: relative;
+            display: inline-block;
+            margin-top: 15px;
+        }
+        .submit-btn-container button {
+            background-color: #2e008b;
+            color: white;
+            border: none;
+            padding: 10px 25px;
+            border-radius: 4px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .submit-btn-container button:hover {
+            background-color: #4300c7;
+        }
+        .submit-btn-container .tooltip-text {
+            visibility: hidden;
+            width: 180px;
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            border-radius: 6px;
+            padding: 8px 0;
+            position: absolute;
+            z-index: 1;
+            bottom: 125%;
+            left: 50%;
+            margin-left: -90px;
+            opacity: 0;
+            transition: opacity 0.2s;
+            font-size: 0.85rem;
+            pointer-events: none;
+        }
+        .submit-btn-container:hover .tooltip-text {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        /* 4. Active Dark Mode Explicit Overrides */
+        body.dark-mode {
+            background-color: #121212;
+            color: #e0e0e0;
+        }
+        body.dark-mode .theme-switch-wrapper {
+            background-color: #1a1a1a;
+        }
+        body.dark-mode section {
+            background-color: #1e1e1e;
+            border-color: #333;
+        }
+        body.dark-mode h2 {
+            color: #9d76ff;
+            border-bottom-color: #9d76ff;
+        }
+        body.dark-mode .modal-content {
+            background-color: #1e1e1e;
+            color: #ffffff;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.6);
+        }
+        body.dark-mode .modal-content h3 {
+            color: #9d76ff;
+        }
+        body.dark-mode .modal-content button,
+        body.dark-mode .submit-btn-container button {
+            background-color: #9d76ff;
+            color: #121212;
+        }
+        body.dark-mode .resource-box {
+            background-color: #252525;
+            border-left-color: #9d76ff;
+        }
     </style>
 </head>
 <body>
+
+    <div id="welcome-modal" class="modal-overlay">
+        <div class="modal-content">
+            <h3>Notice</h3>
+            <p>This page is a work in progress.</p>
+            <button id="close-modal-btn">Close</button>
+        </div>
+    </div>
 
     <div class="theme-switch-wrapper">
         <span>Dark Mode</span>
@@ -110,189 +259,118 @@
     </div>
 
     <header>
-        <h1 id="welcome-header">Welcome to My Portfolio</h1>
+        <h1>Welcome to my Portfolio, Chris!</h1>
     </header>
 
     <nav>
         <a href="#about">About</a>
-        <a href="#featured-content">Projects</a>
+        <a href="#projects">Projects</a>
         <a href="#contact">Contact</a>
     </nav>
 
-    <main>
-        <section id="about">
-            <h2>About Me</h2>
-            <p>Hi, I'm Cesar, an IT student specializing in networking, systems security, and modern web development architectures.</p>
-            
-            <h3>Skills & Technologies</h3>
-            <ul id="skills-list"></ul>
-        </section>
+    <section id="about">
+        <h2>About Me</h2>
+        <p>Hi, I'm Cesar, an IT student specializing in networking, systems security, and modern web development architectures.</p>
+        
+        <h3>Skills & Technologies</h3>
+        <ul>
+            <li>HTML5 / CSS3 (Flexbox, Grid)</li>
+            <li>JavaScript (ES6+)</li>
+            <li>IT Networking & Protocols</li>
+            <li>Git & GitHub Deployment</li>
+        </ul>
+    </section>
 
-        <section id="featured-content">
-            <h2>Featured Content</h2>
-            
-            <div id="university-resources" class="resource-box">
-                <h3>University Resources</h3>
-                <p>Explore my academic program curriculum:</p>
-                <a href="https://www.ecpi.edu" target="_blank">ECPI University Official Site</a>
+    <section id="projects">
+        <h2>Featured Content</h2>
+        <div class="resource-box">
+            <h4>University Resources</h4>
+            <p>Explore my academic program curriculum:</p>
+            <a href="https://www.ecpi.edu" target="_blank" style="color: #2e008b; font-weight: bold;" id="univ-link">ECPI University Official Site</a>
+        </div>
+    </section>
+
+    <section id="contact">
+        <h2>Contact</h2>
+        <p>Feel free to reach out by using the form setup below.</p>
+        <form id="portfolio-contact-form" onsubmit="event.preventDefault();">
+            <div style="margin-bottom: 10px;">
+                <label style="display: block; margin-bottom: 5px;">Name:</label>
+                <input type="text" style="width: 100%; max-width: 300px; padding: 6px;" placeholder="Your Name" required />
             </div>
-
-            <div id="personal-projects" class="resource-box">
-                <h3>Personal Projects</h3>
+            <div style="margin-bottom: 10px;">
+                <label style="display: block; margin-bottom: 5px;">Message:</label>
+                <textarea style="width: 100%; max-width: 400px; height: 80px; padding: 6px;" placeholder="Your Message..." required></textarea>
             </div>
-        </section>
-
-        <section id="contact">
-            <h2>Contact Me</h2>
-            <form id="contact-form">
-                <div style="margin-bottom: 12px;">
-                    <label for="name" style="display:block; font-weight:bold;">Name:</label>
-                    <input type="text" id="name" required placeholder="Enter your name">
-                </div>
-                <div style="margin-bottom: 15px;">
-                    <label for="email" style="display:block; font-weight:bold;">Email:</label>
-                    <input type="email" id="email" required placeholder="Enter your email">
-                </div>
+            
+            <div class="submit-btn-container">
                 <button type="submit" id="submit-btn">Submit</button>
-            </form>
-            <div id="form-status" style="margin-top: 15px; font-weight: bold;"></div>
-        </section>
-    </main>
+                <span class="tooltip-text">Click to send your message!</span>
+            </div>
+        </form>
+    </section>
 
     <script>
-        // ==========================================================================
-        // 1. ORIGINAL LOGIC: Prompt Visitor Name
-        // ==========================================================================
-        var visitorName = prompt("Please enter your name:");
-        if (visitorName) {
-            document.getElementById("welcome-header").innerText = "Welcome to my Portfolio, " + visitorName + "!";
-        }
+        document.addEventListener("DOMContentLoaded", function() {
+            
+            // ----------------------------------------------------
+            // FEATURE 1: Modal Control Module
+            // ----------------------------------------------------
+            const modal = document.getElementById("welcome-modal");
+            const closeModalBtn = document.getElementById("close-modal-btn");
 
-        // ==========================================================================
-        // 2. ORIGINAL LOGIC: Conditional Visibility Rule
-        // ==========================================================================
-        const projectsCount = 2; 
-        const uniDiv = document.getElementById("university-resources");
-        const personalDiv = document.getElementById("personal-projects");
-
-        if (projectsCount < 3) {
-            uniDiv.style.display = "block";
-            personalDiv.style.display = "block";
-        } else {
-            personalDiv.style.display = "block";
-            uniDiv.style.display = "none";
-        }
-
-        // ==========================================================================
-        // 3. ORIGINAL LOGIC: Array Loop for Skills List Generation
-        // ==========================================================================
-        const skills = ["HTML", "CSS", "JavaScript", "Git", "GitHub"];
-        const skillsListContainer = document.getElementById("skills-list");
-
-        skills.forEach(function(skill) {
-            const li = document.createElement("li");
-            li.textContent = skill;
-            skillsListContainer.appendChild(li);
-        });
-
-        // ==========================================================================
-        // 4. NEW REQUIREMENT: Dynamically Add a New Section or Message
-        // ==========================================================================
-        
-        // A. Add introduction paragraph to your Personal Projects block using appendChild()
-        if (personalDiv) {
-            const projectIntro = document.createElement("p");
-            projectIntro.textContent = "🚀 Latest Deployment: I just finished building and establishing an interactive Math Table Pop-Up matrix app framework utilizing sessionStorage streams.";
-            projectIntro.style.color = "#2e008b";
-            projectIntro.style.fontWeight = "bold";
-            personalDiv.appendChild(projectIntro);
-        }
-
-        // B. Timed alert banner tracking page delivery initialization status
-        setTimeout(() => {
-            const banner = document.createElement("div");
-            banner.style.cssText = `
-                background-color: #2196F3;
-                color: white;
-                text-align: center;
-                padding: 12px;
-                position: fixed;
-                top: 0; left: 0; width: 100%;
-                font-weight: bold;
-                z-index: 1000;
-                box-shadow: 0 2px 8px rgba(0,0,0,0.2);
-            `;
-            banner.innerHTML = '✨ Portfolio status: Online & Fully Configured. <span id="close-banner" style="float:right; margin-right:30px; cursor:pointer; font-size:1.2rem;">&times;</span>';
-            document.body.prepend(banner);
-
-            document.getElementById("close-banner").onclick = () => banner.remove();
-        }, 2000);
-
-        // ==========================================================================
-        // 5. NEW REQUIREMENT: Reference and Modify Existing Elements with Selectors
-        // ==========================================================================
-        // Modification 1: Target the Contact container explicitly via ID selector
-        const contactSection = document.getElementById("contact");
-        if (contactSection) {
-            contactSection.style.border = "2px dashed #2e008b";
-        }
-
-        // Modification 2: Target sub-section tags via querySelector to clean lettering layout
-        const intermediateHeadings = document.querySelector("h2");
-        if (intermediateHeadings) {
-            intermediateHeadings.style.letterSpacing = "0.5px";
-        }
-
-        // ==========================================================================
-        // 6. ORIGINAL LOGIC: Dark Mode Toggle Event Switcher
-        // ==========================================================================
-        const toggleSwitch = document.getElementById("checkbox");
-        toggleSwitch.addEventListener("change", function(e) {
-            if (e.target.checked) {
-                document.body.classList.add("dark-theme");
-                if (contactSection) contactSection.style.border = "2px dashed #2196F3";
-            } else {
-                document.body.classList.remove("dark-theme");
-                if (contactSection) contactSection.style.border = "2px dashed #2e008b";
+            if (closeModalBtn && modal) {
+                closeModalBtn.addEventListener("click", function() {
+                    modal.style.opacity = "0";
+                    setTimeout(() => {
+                        modal.style.display = "none";
+                    }, 300); // Smooth animation exit execution
+                });
             }
-        });
 
-        // ==========================================================================
-        // 7. NEW REQUIREMENT: Timed Confirmation for Form Submissions
-        // ==========================================================================
-        const contactForm = document.getElementById("contact-form");
-        const statusMessage = document.getElementById("form-status");
-        const submitButton = document.getElementById("submit-btn");
+            // ----------------------------------------------------
+            // FEATURE 2: Dark Mode Preference Storage Engine
+            // ----------------------------------------------------
+            const toggleSwitch = document.querySelector('#checkbox');
+            const currentTheme = localStorage.getItem('theme');
 
-        contactForm.addEventListener("submit", function(event) {
-            // a. Prevent the standard page reload handling action
-            event.preventDefault();
-
-            // Pull standard name field tracking details
-            const inputName = document.getElementById("name").value;
-
-            // b. Display dynamic sending statement element updates
-            statusMessage.textContent = "⏳ Sending your message details... Please hold.";
-            statusMessage.style.color = "#d97706"; 
-            submitButton.disabled = true;
-
-            // c. Delay processing state updates by 2.5 seconds using standard setTimeout
-            setTimeout(function() {
+            // Set layout dynamically based on historical user choices
+            if (currentTheme) {
+                document.documentElement.setAttribute('data-theme', currentTheme);
                 
-                // d. Swap placeholder content updates with final validation receipt details
-                statusMessage.textContent = "✅ Thank you, " + inputName + "! Your submission message data was processed successfully!";
-                statusMessage.style.color = "#16a34a"; 
+                if (currentTheme === 'dark') {
+                    toggleSwitch.checked = true;
+                    document.body.classList.add('dark-mode');
+                    updateUniversityLinkTheme(true);
+                }
+            }
 
-                // Reset standard form inputs layout fields back to fresh baseline state
-                contactForm.reset();
+            // Read live adjustments to save state parameters down to local client storage
+            function switchTheme(e) {
+                if (e.target.checked) {
+                    document.documentElement.setAttribute('data-theme', 'dark');
+                    localStorage.setItem('theme', 'dark');
+                    document.body.classList.add('dark-mode');
+                    updateUniversityLinkTheme(true);
+                } else {
+                    document.documentElement.setAttribute('data-theme', 'light');
+                    localStorage.setItem('theme', 'light');
+                    document.body.classList.remove('dark-mode');
+                    updateUniversityLinkTheme(false);
+                }    
+            }
 
-                // Clear feedback and enable click paths after a minor reading window
-                setTimeout(() => {
-                    statusMessage.textContent = "";
-                    submitButton.disabled = false;
-                }, 5000);
+            // Dynamic color adjustment for nested inline anchor layout pieces
+            function updateUniversityLinkTheme(isDark) {
+                const univLink = document.getElementById('univ-link');
+                if(univLink) {
+                    univLink.style.color = isDark ? '#9d76ff' : '#2e008b';
+                }
+            }
 
-            }, 2500); 
+            if (toggleSwitch) {
+                toggleSwitch.addEventListener('change', switchTheme, false);
+            }
         });
     </script>
 </body>

@@ -36,7 +36,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const projectsContainer = document.querySelector("#projects-container");
 
     if (projectsContainer) {
-        projectsContainer.innerHTML = ""; // Clear existing manual text structures
+        projectsContainer.innerHTML = ""; // Clear existing text structure
 
         finalProjectsList.forEach(project => {
             const projectCard = document.createElement("div");

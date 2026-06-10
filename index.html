@@ -5,292 +5,130 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cesar's Portfolio</title>
     <style>
-        /* ===================================================
-           CESAR'S ORIGINAL PORTFOLIO CORE STYLES
-           =================================================== */
-        body { 
-            font-family: sans-serif; 
-            background-color: #fafafa; 
-            margin: 0; 
-            padding: 0; 
-            transition: background-color 0.4s, color 0.4s; 
+        /* Existing styles matching your portfolio layout */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
             color: #333;
         }
-        header { 
-            background-color: #2e008b; 
-            color: white; 
-            padding: 20px; 
-            text-align: center; 
+        header {
+            background-color: #0000b3;
+            color: white;
+            text-align: center;
+            padding: 20px 0;
         }
-        nav { 
-            background-color: #333; 
-            color: white; 
-            padding: 10px; 
-            text-align: center; 
+        nav {
+            background-color: #222;
+            text-align: center;
+            padding: 10px 0;
         }
-        nav a { 
-            color: white; 
-            margin: 0 15px; 
-            text-decoration: none; 
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 15px;
             font-weight: bold;
         }
-        nav a:hover {
-            text-decoration: underline;
-        }
-        section { 
-            padding: 20px; 
-            margin: 20px; 
-            background-color: white; 
-            border-radius: 8px; 
-            transition: background-color 0.4s, color 0.4s; 
-        }
-        
-        /* Cesar's Custom Framed Section Outlines */
-        #about {
-            border: 2px solid #2e008b;
-        }
-        #projects {
-            border: 2px solid #45249c;
-        }
-        #contact {
-            border: 2px dashed #3071a9;
-            border-radius: 4px;
+        .container {
+            max-width: 1000px;
+            margin: 20px auto;
             padding: 20px;
+            background-color: white;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
-
-        h2 { 
-            border-bottom: 2px solid #2e008b; 
-            padding-bottom: 5px; 
-            color: #2e008b;
-            margin-top: 0;
+        section {
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #eee;
         }
-        ul {
-            padding-left: 20px;
+        section:last-child {
+            border-bottom: none;
         }
-        li {
-            margin-bottom: 5px;
+        h2 {
+            color: #0000b3;
+            border-bottom: 2px solid #0000b3;
+            padding-bottom: 5px;
         }
-
-        /* University Resources Box */
-        .university-box {
-            border: 1px solid #3071a9;
-            border-radius: 4px;
-            padding: 15px;
-            background-color: #ffffff;
-            transition: background-color 0.4s;
-        }
-        .personal-projects-box {
-            border: 1px solid #45249c;
-            border-radius: 4px;
+        .content-box {
+            border: 1px solid #ccd;
+            background-color: #f9f9fc;
             padding: 15px;
             margin-top: 15px;
-            background-color: #ffffff;
-            transition: background-color 0.4s;
+            border-radius: 4px;
         }
-
-        /* Cesar's Styled Input Fields */
-        input[type="text"], input[type="email"], textarea {
+        /* Custom styles for your newly generated dynamic project cards */
+        .project-card {
+            background-color: #ffffff;
+            border: 1px solid #ddd;
+            border-left: 5px solid #0000b3;
+            padding: 20px;
+            margin: 15px 0;
+            border-radius: 4px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+        .project-card h3 {
+            margin-top: 0;
+            color: #222;
+        }
+        .project-card img {
+            max-width: 120px;
+            height: auto;
+            display: block;
+            margin: 10px 0;
+            border-radius: 4px;
+            border: 1px solid #eee;
+        }
+        .project-card p {
+            color: #555;
+            line-height: 1.5;
+        }
+        .project-card a {
+            display: inline-block;
+            margin-top: 10px;
+            color: #0000b3;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .project-card a:hover {
+            text-decoration: underline;
+        }
+        /* Contact Form styling matching your layout */
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        .form-group input, .form-group textarea {
             width: 100%;
-            max-width: 300px;
-            padding: 6px;
-            margin-top: 4px;
-            margin-bottom: 12px;
+            padding: 8px;
             border: 1px solid #ccc;
             border-radius: 4px;
-            display: block;
             box-sizing: border-box;
         }
-        textarea {
-            max-width: 400px;
-            height: 60px;
-        }
-
-        /* Original Submit Button Style */
-        .submit-btn-container button {
-            background-color: #3071a9;
+        button {
+            background-color: #0000b3;
             color: white;
             border: none;
-            padding: 6px 14px;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 0.9rem;
-        }
-
-        /* ===================================================
-           ASSIGNMENT REQUIRED INTERACTIVE STYLES
-           =================================================== */
-        
-        /* 1. Theme Dark Mode Switch Layout */
-        .theme-switch-wrapper {
-            display: flex;
-            justify-content: flex-end;
-            align-items: center;
             padding: 10px 20px;
-            background-color: #ffffff;
-            transition: background-color 0.4s;
-        }
-        .theme-switch-wrapper span {
-            margin-right: 10px;
-            font-size: 0.9rem;
-            font-weight: bold;
-        }
-        .theme-switch {
-            position: relative;
-            display: inline-block;
-            width: 46px;
-            height: 22px;
-        }
-        .theme-switch input {
-            opacity: 0; width: 0; height: 0;
-        }
-        .slider {
-            position: absolute; cursor: pointer;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background-color: #ccc;
-            transition: .4s; border-radius: 22px;
-        }
-        .slider:before {
-            position: absolute; content: "";
-            height: 14px; width: 14px;
-            left: 4px; bottom: 4px;
-            background-color: white;
-            transition: .4s; border-radius: 50%;
-        }
-        input:checked + .slider {
-            background-color: #3071a9;
-        }
-        input:checked + .slider:before {
-            transform: translateX(24px);
-        }
-
-        /* 2. Custom Welcome Modal Windows */
-        .modal-overlay {
-            position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            background-color: rgba(0, 0, 0, 0.6);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 9999;
-            opacity: 1;
-            transition: opacity 0.3s ease;
-        }
-        .modal-content {
-            background-color: #ffffff;
-            padding: 25px;
-            border-radius: 8px;
-            text-align: center;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-            max-width: 360px;
-            width: 85%;
-            transition: background-color 0.4s, color 0.4s;
-        }
-        .modal-content h3 {
-            margin-top: 0;
-            color: #2e008b;
-        }
-        .modal-content button {
-            background-color: #2e008b;
-            color: white;
-            border: none;
-            padding: 8px 20px;
             border-radius: 4px;
             cursor: pointer;
             font-weight: bold;
-            margin-top: 10px;
         }
-
-        /* 3. Button Action Hover Tooltip */
-        .submit-btn-container {
-            position: relative;
-            display: inline-block;
-        }
-        .submit-btn-container .tooltip-text {
-            visibility: hidden;
-            width: 160px;
-            background-color: #222222;
-            color: #ffffff;
-            text-align: center;
-            border-radius: 5px;
-            padding: 6px 0;
-            position: absolute;
-            z-index: 1;
-            bottom: 130%;
-            left: 50%;
-            margin-left: -80px;
-            opacity: 0;
-            transition: opacity 0.2s;
-            font-size: 0.8rem;
-            pointer-events: none;
-        }
-        .submit-btn-container:hover .tooltip-text {
-            visibility: visible;
-            opacity: 1;
-        }
-
-        /* ===================================================
-           DYNAMIC DARK MODE OVERRIDES
-           =================================================== */
-        body.dark-mode {
-            background-color: #121212;
-            color: #e0e0e0;
-        }
-        body.dark-mode .theme-switch-wrapper {
-            background-color: #121212;
-            color: #ffffff;
-        }
-        body.dark-mode section {
-            background-color: #1e1e1e;
-        }
-        body.dark-mode .university-box, 
-        body.dark-mode .personal-projects-box {
-            background-color: #262626;
-        }
-        body.dark-mode h2 {
-            color: #9d76ff;
-            border-bottom-color: #45249c;
-        }
-        body.dark-mode .modal-content {
-            background-color: #1e1e1e;
-            color: #ffffff;
-        }
-        body.dark-mode .modal-content h3 {
-            color: #9d76ff;
-        }
-        body.dark-mode .modal-content button {
-            background-color: #9d76ff;
-            color: #121212;
-        }
-        body.dark-mode input[type="text"], 
-        body.dark-mode input[type="email"], 
-        body.dark-mode textarea {
-            background-color: #2a2a2a;
-            border-color: #444;
-            color: #fff;
+        button:hover {
+            background-color: #000080;
         }
     </style>
 </head>
 <body>
 
-    <div id="welcome-modal" class="modal-overlay">
-        <div class="modal-content">
-            <h3>Notice</h3>
-            <p>This page is a work in progress.</p>
-            <button id="close-modal-btn">Close</button>
-        </div>
-    </div>
-
-    <div class="theme-switch-wrapper">
-        <span>Dark Mode</span>
-        <label class="theme-switch" for="checkbox">
-            <input type="checkbox" id="checkbox" />
-            <div class="slider"></div>
-        </label>
-    </div>
-
     <header>
-        <h1 style="margin: 0; font-size: 2rem;">Welcome to my Portfolio, Christopher!</h1>
+        <h1>Welcome to my Portfolio, Cesar!</h1>
     </header>
 
     <nav>
@@ -299,98 +137,136 @@
         <a href="#contact">Contact</a>
     </nav>
 
-    <section id="about">
-        <h2>About Me</h2>
-        <p>Hi, I'm Cesar, an IT student specializing in networking, systems security, and modern web development architectures.</p>
-        <h3>Skills & Technologies</h3>
-        <ul>
-            <li>HTML</li>
-            <li>CSS</li>
-            <li>JavaScript</li>
-            <li>Git</li>
-            <li>GitHub</li>
-        </ul>
-    </section>
-
-    <section id="projects">
-        <h2>Featured Content</h2>
+    <div class="container">
         
-        <div class="university-box">
-            <h4 style="margin-top: 0; color: #3071a9;">University Resources</h4>
-            <p style="margin-bottom: 8px;">Explore my academic program curriculum:</p>
-            <a href="https://www.ecpi.edu" target="_blank" style="color: #3071a9; font-weight: bold;" id="univ-link">ECPI University Official Site</a>
-        </div>
-
-        <div class="personal-projects-box">
-            <h4 style="margin-top: 0; color: #45249c;">Personal Projects</h4>
-            <p style="margin-bottom: 0;">🚀 <strong>Latest Deployment:</strong> I just finished building and establishing an interactive Math Table Pop-Up matrix app framework utilizing sessionStorage streams.</p>
-        </div>
-    </section>
-
-    <section id="contact">
-        <h2 style="color: #3071a9; border-bottom-color: #3071a9;">Contact Me</h2>
-        <form id="portfolio-form" onsubmit="event.preventDefault();">
+        <section id="about">
+            <h2>About Me</h2>
+            <p>Hi, I'm Cesar, an IT student specializing in networking, systems security, and modern web development architectures.</p>
             
-            <label style="font-weight: bold; font-size: 0.9rem;">Name:</label>
-            <input type="text" placeholder="Enter your name" required />
+            <h3>Skills & Technologies</h3>
+            <ul>
+                <li>HTML5</li>
+                <li>CSS3</li>
+                <li>JavaScript (ES6)</li>
+                <li>Git</li>
+                <li>GitHub</li>
+            </ul>
+        </section>
 
-            <label style="font-weight: bold; font-size: 0.9rem;">Email:</label>
-            <input type="email" placeholder="Enter your email" required />
-
-            <label style="font-weight: bold; font-size: 0.9rem;">Message:</label>
-            <textarea placeholder="Enter your message..." required></textarea>
-
-            <div class="submit-btn-container">
-                <button type="submit">Submit</button>
-                <span class="tooltip-text">Click to send your message!</span>
+        <section id="projects">
+            <h2>Featured Content</h2>
+            
+            <div class="content-box">
+                <h3>University Resources</h3>
+                <p>Explore my academic program curriculum:</p>
+                <a href="https://www.ecpi.edu" target="_blank">ECPI University Official Site</a>
             </div>
-            
-        </form>
-    </section>
+
+            <div class="content-box">
+                <h3>Personal Projects</h3>
+                <p>🚀 <strong>Latest Deployment:</strong> I just finished building and establishing an interactive Math Table Pop-Up matrix app framework utilizing sessionStorage streams.</p>
+                
+                <div id="projects-container">
+                    </div>
+            </div>
+        </section>
+
+        <section id="contact">
+            <h2>Contact Me</h2>
+            <form id="contact-form" onsubmit="event.preventDefault(); alert('Message submitted placeholder!');">
+                <div class="form-group">
+                    <label for="name">Name:</label>
+                    <input type="text" id="name" placeholder="Enter your name">
+                </div>
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" placeholder="Enter your email">
+                </div>
+                <div class="form-group">
+                    <label for="message">Message:</label>
+                    <textarea id="message" rows="4" placeholder="Enter your message..."></textarea>
+                </div>
+                <button type="submit">Submit</button>
+            </form>
+        </section>
+
+    </div>
 
     <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            
-            // 1. Welcome Modal Dismissal Logic
-            const modal = document.getElementById("welcome-modal");
-            const closeModalBtn = document.getElementById("close-modal-btn");
+        // 1. DEFINE OBJECTS WITH THE SPECIFIED PROPERTIES
+        const project1 = {
+            title: "Interactive Math Table Matrix",
+            summary: "An interactive web application framework built to generate dynamic mathematical tables utilizing sessionStorage streams.",
+            image: "https://via.placeholder.com/150", 
+            repository: "https://github.com/CesarChris97/MyNewProject"
+        };
 
-            if (closeModalBtn && modal) {
-                closeModalBtn.addEventListener("click", function() {
-                    modal.style.opacity = "0";
-                    setTimeout(() => {
-                        modal.style.display = "none";
-                    }, 300);
+        const project2 = {
+            title: "Networking Infrastructure Lab",
+            summary: "A practical evaluation of routing protocols, hardware configuration, and wireless security principles mapping to the OSI model.",
+            image: "https://via.placeholder.com/150",
+            repository: "https://github.com/CesarChris97/MyNewProject"
+        };
+
+        const project3 = {
+            title: "Behavioral Influence & Conditioning Analysis",
+            summary: "A research project focusing on psychological behaviors, social influence, and clinical case studies regarding human cognitive processes.",
+            image: "https://via.placeholder.com/150",
+            repository: "https://github.com/CesarChris97/MyNewProject"
+        };
+
+        // 2. DEFINE ARRAY TO CONTAIN THE OBJECTS
+        const projectsArray = [project1, project2, project3];
+
+        // 3. STORE AND PARSE INFORMATION (sessionStorage workflow)
+        if (!sessionStorage.getItem("portfolioProjects")) {
+            // If no data exists, store the project array in session storage
+            sessionStorage.setItem("portfolioProjects", JSON.stringify(projectsArray));
+        }
+
+        // Retrieve and parse it using JSON.parse()
+        const retrievedData = sessionStorage.getItem("portfolioProjects");
+        const finalProjectsList = JSON.parse(retrievedData);
+
+        // 4. RENDER PROJECTS DYNAMICALLY
+        document.addEventListener("DOMContentLoaded", () => {
+            // Select the project section using a DOM selector
+            const projectsContainer = document.querySelector("#projects-container");
+
+            if (projectsContainer) {
+                projectsContainer.innerHTML = ""; // Clear existing manual text structures
+
+                // Loop through array and dynamically build DOM card nodes
+                finalProjectsList.forEach(project => {
+                    const projectCard = document.createElement("div");
+                    projectCard.className = "project-card";
+
+                    // Title element
+                    const projectTitle = document.createElement("h3");
+                    projectTitle.textContent = project.title;
+                    projectCard.appendChild(projectTitle);
+
+                    // Image element
+                    const projectImage = document.createElement("img");
+                    projectImage.src = project.image;
+                    projectImage.alt = `${project.title} Preview`;
+                    projectCard.appendChild(projectImage);
+
+                    // Summary element
+                    const projectSummary = document.createElement("p");
+                    projectSummary.textContent = project.summary;
+                    projectCard.appendChild(projectSummary);
+
+                    // Link element
+                    const projectLink = document.createElement("a");
+                    projectLink.href = project.repository;
+                    projectLink.target = "_blank";
+                    projectLink.textContent = "View Repository on GitHub →";
+                    projectCard.appendChild(projectLink);
+
+                    // Append card structure into the document container
+                    projectsContainer.appendChild(projectCard);
                 });
-            }
-
-            // 2. Persistent LocalStorage Dark Mode Logic
-            const toggleSwitch = document.querySelector('#checkbox');
-            const savedTheme = localStorage.getItem('theme');
-
-            if (savedTheme === 'dark') {
-                toggleSwitch.checked = true;
-                document.body.classList.add('dark-mode');
-                updateLinks(true);
-            }
-
-            toggleSwitch.addEventListener('change', function(e) {
-                if (e.target.checked) {
-                    localStorage.setItem('theme', 'dark');
-                    document.body.classList.add('dark-mode');
-                    updateLinks(true);
-                } else {
-                    localStorage.setItem('theme', 'light');
-                    document.body.classList.remove('dark-mode');
-                    updateLinks(false);
-                }    
-            });
-
-            function updateLinks(isDark) {
-                const univLink = document.getElementById('univ-link');
-                if (univLink) {
-                    univLink.style.color = isDark ? '#9d76ff' : '#3071a9';
-                }
             }
         });
     </script>
